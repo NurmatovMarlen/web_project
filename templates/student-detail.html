@@ -1,0 +1,24 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>{{student.student_name}}</h1>
+									</header>
+
+									<span class="image main"><img src="{{student.get_image}}" style="width: 700px;height:auto;" alt="" /></span>
+
+									<p>Posted: {{student.posted_date}}</p>
+
+									<hr class="major" />
+									{%for image in images %}
+									<img src="{{image}}" style="width: 500px;height: 500px" class="img-thumbnail" alt="...">
+									{%endfor%}
+
+									<h2>{{student.description|truncatewords:10}}</h2>
+									<a href="{%url 'update-student' student.id%}"><i class="fas fa-edit"></i></a>
+									<a href="{%url 'delete-student' student.id%}"><i class="fas fa-user-times"></i></a>
+								</section>
+{%endblock%}

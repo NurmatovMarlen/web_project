@@ -1,0 +1,53 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+
+							<!-- Content -->
+								<section>
+									<header class="table">
+										<h1>Weekly best student nomination </h1>
+									</header>
+									  {% if messages %}
+                                    <ul class="messages">
+                                        {% for message in messages %}
+										<div class="alert alert-warning" role="alert">{{message}}</div>
+										{% endfor %}
+									</ul>
+                                     {% endif %}
+
+
+									<span class="image main"><img src="{%static 'images/makers1.svg'%}" style="width: 1000px;height: auto;" alt="" /></span>
+
+									<h3><p>This website was created to publish Makers Bootcamp's best students regularly.</p></h3>
+									<hr class="major" />
+
+									<div class="posts">
+										{%for student in page_obj%}
+										<article>
+											<a href="#" class="image"><img src="{{student.get_image}}" style="width: 400px;height: auto" alt="" /></a>
+											<h3>{{student}}</h3>
+											<p>{{student.description|truncatewords:10}}</p>
+											<ul class="actions">
+												<li><a href="{%url 'detail' student.id%}" class="btn btn-outline-warning">Full screen</a></li>
+											</ul>
+										</article>
+										{%endfor%}
+									</div>
+
+
+								</section>
+<nav aria-label="...">
+  <ul class="pagination pagination-lg">
+	  {%if page_obj.has_previous%}
+	  <li class="btn btn-light"><a class="page-link" href="{%url 'home' %}?page={{page_obj.previous_page_number}}">{{page_obj.previous_page_number}}</a></li>
+	{%endif%}
+    <li class="page-item active" aria-current="page">
+      <span class="page-link">{{page_obj.number}}</span>
+    </li>
+	{%if page_obj.has_next%}
+    <li class="page-item"><a class="page-link" href="{%url 'home'%}?page={{page_obj.next_page_number}}">{{page_obj.next_page_number}}</a></li>
+	  {%endif%}
+  </ul>
+</nav>
+{%endblock%}
+

@@ -1,0 +1,17 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<h1>Search results:</h1>
+<div class="posts">
+										{%for student in students%}
+										<article>
+											<a href="#" class="image"><img src="{{student.get_image}}" style="width: 400px;height: 400px" alt="" /></a>
+											<h3>{{student}}</h3>
+											<p>{{student.description|truncatewords:10}}</p>
+											<ul class="actions">
+												<li><a href="{%url 'detail' student.id%}" class="button">More</a></li>
+											</ul>
+										</article>
+										{%endfor%}
+									</div>
+{%endblock%}

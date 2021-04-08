@@ -1,0 +1,45 @@
+{%extends 'base.html' %}
+{%load static%}
+{%block content%}
+
+							<!-- Banner -->
+								<section id="banner">
+									<div class="content">
+										<header>
+											<h1>{{category.name}}</h1>
+<!--											<p>A free and fully responsive site template</p>-->
+										</header>
+										<p></p>
+										{%if category.get_children %}
+										{%for child in category.get_children%}
+										<a href="{%url 'category' child.slug %}"><li>{{child.name}}</li></a>
+										{%endfor%}
+										{%endif%}
+									</div>
+									<span class="btn btn-link">
+										<img src="{{category.image.url}}"style="width: 450px;height: auto" alt="" />
+									</span>
+								</section>
+
+							<!-- Section -->
+							{%if not category.get_children%}
+								<section>
+									<header class="major">
+										<h2>List of students</h2>
+									</header>
+									<div class="posts">
+										{%for student in students%}
+										<article>
+											<a href="#" class="image"><img src="{{student.get_image}}" style="width: 400px;height: 400px" alt="" /></a>
+											<h3>{{student}}</h3>
+											<p>{{student.description|truncatewords:10}}</p>
+											<ul class="actions">
+												<li><a href="{%url 'detail' student.id%}" class="btn btn-warning">More</a></li>
+											</ul>
+										</article>
+										{%endfor%}
+									</div>
+								</section>
+							{%endif%}
+
+{%endblock%}
